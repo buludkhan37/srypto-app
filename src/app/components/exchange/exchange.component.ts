@@ -1,4 +1,4 @@
-import {Component, computed, inject, model, signal, ViewEncapsulation} from '@angular/core';
+import { Component, computed, inject, model, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DatePipe, DecimalPipe, NgClass, NgTemplateOutlet } from '@angular/common';
 import { ScrollingModule } from '@angular/cdk/scrolling';
@@ -22,7 +22,6 @@ type direction = 'asc' | 'desc' | null;
     ],
     templateUrl: './exchange.component.html',
     styleUrl: './exchange.component.scss',
-  encapsulation: ViewEncapsulation.None
 })
 export class ExchangeComponent {
     exchanges = ['Binance', 'ByBit', 'OKX'];
