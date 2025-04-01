@@ -9,6 +9,6 @@ export const appConfig: ApplicationConfig = {
         provideZoneChangeDetection({ eventCoalescing: true }),
         provideRouter(routes),
         provideHttpClient(),
-        { provide: LOCALE_ID, useValue: LOCALE_ID },
+        { provide: LOCALE_ID, useValue: 'ru-RU' },
     ],
 };

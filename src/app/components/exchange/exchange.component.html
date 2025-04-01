@@ -1,0 +1,66 @@
+<div class="header">
+    <div class="exchange-selector">
+        <label for="exchange">Выбирите биржу:</label>
+        <select id="exchange" [(ngModel)]="selectedExchange">
+            @for (exchange of exchanges; track exchange) {
+                <option [value]="exchange">{{ exchange }}</option>
+            }
+        </select>
+    </div>
+    <div class="time" (mouseenter)="utcEnabled.set(true)" (mouseleave)="utcEnabled.set(false)">
+        {{ showTime() | date: 'mediumTime' }}
+    </div>
+</div>
+
+<div class="instrument-table">
+    <div class="filter">
+        <input type="text" placeholder="Поиск по инструментам..." [(ngModel)]="filter" />
+    </div>
+    <button mat-button class="reload" (click)="api.reload()">Обновить</button>
+    <cdk-virtual-scroll-viewport itemSize="40" class="scroll-container">
+        <table class="table">
+            <thead class="new">
+                <tr>
+                    <th>Инструмент</th>
+                    <th (click)="handlePriceSort()">Цена ↑↓</th>
+                    <th>Объем</th>
+                    <th>Изменение (%)</th>
+                    <th>Макс/Мин за 24ч</th>
+                </tr>
+            </thead>
+          <tbody>
+            @if (loading()) {
+              <tr>
+                <td colspan="5" class="no-results">
+                  <ng-container [ngTemplateOutlet]="loadingTpl" />
+                </td>
+              </tr>
+            } @else {
+              @for (item of filteredData(); track item.symbol) {
+                <tr>
+                  <td>{{ item.symbol }}</td>
+                  <td>{{ item.price | number: '1.4-4' }}</td>
+                  <td>{{ item.volume }}</td>
+                  <td
+                    [ngClass]="{
+                                    positive: item.priceChangePercent > 0,
+                                    negative: item.priceChangePercent < 0,
+                                }"
+                  >
+                    {{ item.priceChangePercent }}
+                  </td>
+                  <td>{{ item.highPrice | number: '1.4-5' }} / {{ item.lowPrice | number: '1.4-5' }}</td>
+                </tr>
+              } @empty {
+                <tr>
+                  <td colspan="5" class="no-results">
+                    Нет инструментов, соответствующих запросу.
+                  </td>
+                </tr>
+              }
+            }
+          </tbody>
+        </table>
+    </cdk-virtual-scroll-viewport>
+</div>
+<ng-template #loadingTpl>Загрузка инструментов...</ng-template>

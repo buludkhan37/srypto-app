@@ -1,0 +1,161 @@
+$primary-bg: #1b1c21;
+$primary-text: #eee;
+$highlight: #f1bb14;
+$positive: green;
+$negative: red;
+$text-size: 10px;
+
+.header {
+  margin: 20px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.time {
+  cursor: pointer;
+  color: $primary-text;
+  font-weight: 700;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.exchange-selector {
+  label {
+    font-size: $text-size;
+    margin-right: 10px;
+    color: $primary-text;
+  }
+  select {
+    outline: none;
+    font-size: $text-size;
+    cursor: pointer;
+    width: 140px;
+    height: 20px;
+  }
+}
+
+.instrument-table {
+  margin: 20px;
+  font-size: $text-size;
+
+  .filter {
+    margin-bottom: 10px;
+    input {
+      outline: none;
+      padding: 8px;
+      width: 140px;
+      height: 20px;
+      font-size: $text-size;
+    }
+  }
+
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th,
+    td {
+      padding: 12px;
+      text-align: center;
+      background: $primary-bg;
+      color: $primary-text;
+    }
+
+    th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      cursor: pointer;
+      background-color: #f1bb14;
+      color: $primary-bg;
+    }
+  }
+
+  .positive {
+    color: $positive !important;
+    font-weight: 700;
+  }
+
+  .negative {
+    color: $negative !important;
+    font-weight: 700;
+  }
+
+  .scroll-container {
+    height: 400px;
+    overflow-y: auto;
+    display: block;
+    scrollbar-width: thin; // Для Firefox
+    scrollbar-color: $highlight $primary-bg;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: $primary-bg;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $highlight;
+      border-radius: 4px;
+    }
+  }
+
+  .no-results {
+    text-align: center;
+    font-size: $text-size;
+    color: $primary-text;
+    background-color: #2d2d2d;
+    padding: 10px;
+  }
+
+  .reload {
+    height: 20px;
+    width: 140px;
+    color: $primary-bg;
+    background-color: $highlight;
+    outline: none;
+    border: none;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    font-size: $text-size;
+    font-weight: 700;
+
+    &:hover {
+      background-color: $primary-bg;
+      cursor: pointer;
+      color: $highlight;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .exchange-selector,
+    .time {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .filter input {
+      padding: 8px;
+      font-size: 14px;
+    }
+
+    .table {
+      font-size: 14px;
+    }
+
+    th,
+    td {
+      padding: 5px;
+    }
+  }
+}
