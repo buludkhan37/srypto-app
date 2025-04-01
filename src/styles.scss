@@ -11,3 +11,11 @@ body {
 * {
     box-sizing: border-box;
 }
+
+.custom-tooltip {
+  font-size: 8px;
+  height: 17px;
+  background-color: #eee;
+  border-radius: 4px;
+  font-weight: 700;
+}

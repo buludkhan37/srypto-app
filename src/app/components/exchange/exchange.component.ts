@@ -1,19 +1,28 @@
-import { Component, computed, inject, model, signal } from '@angular/core';
+import {Component, computed, inject, model, signal, ViewEncapsulation} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DatePipe, DecimalPipe, NgClass, NgTemplateOutlet } from '@angular/common';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { MatButton } from '@angular/material/button';
 import { utc } from '@date-fns/utc';
 import { ExchangeApiService } from './exchange.api.service';
 import { sortBy, prop } from 'remeda';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 type direction = 'asc' | 'desc' | null;
 
 @Component({
     selector: 'app-exchange',
-  imports: [FormsModule, ScrollingModule, MatButton, NgTemplateOutlet, NgClass, DecimalPipe, DatePipe],
+    imports: [
+        FormsModule,
+        ScrollingModule,
+        NgTemplateOutlet,
+        NgClass,
+        DecimalPipe,
+        DatePipe,
+        MatTooltipModule,
+    ],
     templateUrl: './exchange.component.html',
     styleUrl: './exchange.component.scss',
+  encapsulation: ViewEncapsulation.None
 })
 export class ExchangeComponent {
     exchanges = ['Binance', 'ByBit', 'OKX'];
