@@ -16,22 +16,30 @@
     <div class="filter">
         <input type="text" placeholder="Поиск по инструментам..." [(ngModel)]="filter" />
     </div>
-    <button class="reload" (click)="api.reload()">Обновить</button>
+    <button class="reload" (click)="dataResource.reload()">Обновить</button>
     <cdk-virtual-scroll-viewport itemSize="40" class="scroll-container">
         <table class="table">
             <thead class="table__header">
                 <tr>
-                    <th><span matTooltip="Инструмент" matTooltipClass="custom-tooltip">Инструмент</span></th>
+                    <th><span matTooltip="Инструмент">Инструмент</span></th>
                     <th>
-                        <span matTooltip="Сортировка цен инструментов" matTooltipClass="custom-tooltip" class="sort" (click)="handlePriceSort()">Цена ↑↓</span>
+                        <span
+                            matTooltip="Сортировка цен инструментов"
+                            class="sort"
+                            (click)="handlePriceSort()"
+                        >
+                            Цена ↑↓
+                        </span>
                     </th>
-                    <th><span matTooltip="Объем торгов" matTooltipClass="custom-tooltip">Объем</span></th>
-                    <th><span matTooltip="Процент изменения цены за 24 часа" matTooltipClass="custom-tooltip">Изменение (%)</span></th>
-                    <th><span matTooltip="Высшая/Низшая цена за 24 часа" matTooltipClass="custom-tooltip">Макс/Мин за 24ч</span></th>
+                    <th><span matTooltip="Объем торгов">Объем</span></th>
+                    <th>
+                        <span matTooltip="Процент изменения цены за 24 часа">Изменение (%)</span>
+                    </th>
+                    <th><span matTooltip="Высшая/Низшая цена за 24 часа">Макс/Мин за 24ч</span></th>
                 </tr>
             </thead>
             <tbody>
-                @if (loading()) {
+                @if (dataResource.isLoading()) {
                     <tr>
                         <td colspan="5" class="no-results">
                             <ng-container [ngTemplateOutlet]="loadingTpl" />
